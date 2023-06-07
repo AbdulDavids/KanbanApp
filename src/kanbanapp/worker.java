@@ -1,19 +1,34 @@
 package kanbanapp;
 
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 
 public class worker {
+    taskClass tc = new taskClass();
 
-    private Login account = new Login();
+    ArrayList<String> usernameList = new ArrayList<String>();
+    ArrayList<String> passwordList = new ArrayList<String>();
+    ArrayList<String> firstNameList = new ArrayList<String>();
+    ArrayList<String> lastNameList = new ArrayList<String>();
 
+    public worker() {
+
+        usernameList.add("admin");
+        passwordList.add("admin");
+        firstNameList.add("Administrator");
+        lastNameList.add(" ");
+
+    }
     // --------------------------------------------------------------------------------------------------------------------------//
 
     // provides UI for registratration and login
     public Boolean signIn() {
+
         Boolean finished = false;
         while (!finished) {
 
-            int choice = account.loginOrRegister();
+            int choice = LoginClass.loginOrRegister();
             switch (choice) {
                 case 0:
                     // Registration code
@@ -34,32 +49,35 @@ public class worker {
                                     + "Contains a number." + System.lineSeparator()
                                     + "Contains a special character");
 
-                    account.setFirstName(firstName);
-                    account.setLastName(lastName);
-                    account.setUserName(userName);
-                    account.setPassword(password);
-
-                    JOptionPane.showMessageDialog(null, account.registerUser());
+                    if (LoginClass.checkUserName(userName) && LoginClass.checkPasswordComplexity(password)) {
+                        firstNameList.add(firstName);
+                        lastNameList.add(lastName);
+                        usernameList.add(userName);
+                        passwordList.add(password);
+                    }
+                    JOptionPane.showMessageDialog(null, LoginClass.registerUser(userName, password));
                     break;
 
                 case 1:
                     // login code
-                    if (choice == 1) {
-                        String loginUserName = JOptionPane.showInputDialog("Please enter your username");
 
-                        String loginPassword = JOptionPane.showInputDialog("Please enter your password");
+                    String loginUserName = JOptionPane.showInputDialog("Please enter your username");
 
-                        Boolean loginStatus = account.loginUser(loginUserName, loginPassword);
+                    String loginPassword = JOptionPane.showInputDialog("Please enter your password");
 
-                        JOptionPane.showMessageDialog(null, account.returnLoginStatus(loginStatus), null, 1);
+                    Boolean loginStatus = LoginClass.loginUser(loginUserName, loginPassword, usernameList,
+                            passwordList);
 
-                        if (loginStatus) {
+                    Integer userIndex = LoginClass.returnUserIndex(loginUserName, usernameList);
 
-                            finished = true;
-                        }
+                    String loginMessage = LoginClass.loginMessage(loginStatus, userIndex, firstNameList, lastNameList);
+
+                    JOptionPane.showMessageDialog(null, loginMessage, null, 1);
+
+                    if (loginStatus) {
+                        finished = true;
                     }
-                    break;
-                default:
+
                     break;
             }
 
@@ -67,32 +85,37 @@ public class worker {
         return finished;
     }
 
-    //---------------------------------------------------------------------------------------------------------------------------//
+    // -------------------------------------------------------------------------------------------------------------------------//
 
     // displays task menu
     public void displayTaskApp() {
 
         Boolean quit = false;
-        Task tk = new Task();
 
         while (!quit) {
-            String[] options = { "Add Tasks", "Show Report", "Quit" };
-            Integer loginOrRegister = JOptionPane.showOptionDialog(null, "Welcome to EasyKanban",
-                    null, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options,
-                    options[0]);
 
-            switch (loginOrRegister) {
+            switch (menuClass.taskMenu()) {
                 case 0:
-                    JOptionPane.showMessageDialog(null, "Add Task Coming Soon", null, 1);
+                    // JOptionPane.showMessageDialog(null, "Add Task Coming Soon", null, 1);
+
+                    tc.addTasks(2);
+
                     break;
 
                 case 1:
-                    JOptionPane.showMessageDialog(null, "Coming Soon!", null, 1);
+                    // JOptionPane.showMessageDialog(null, "Coming Soon!", null, 1);
+
+                    tc.displayTasks();
+
                     break;
 
                 case 2:
 
                     quit = true;
+                    break;
+
+                case 3:
+                    LoginClass.displayUsers(usernameList);
                     break;
 
             }

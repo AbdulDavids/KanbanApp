@@ -5,8 +5,10 @@ public class KanbanApp {
     public static void main(String[] args) {
 
         worker wk = new worker();
-        if (wk.signIn()) {
-            wk.displayTaskApp();
+        while (true) {
+            if (wk.signIn()) {
+                wk.displayTaskApp();
+            }
         }
 
     }

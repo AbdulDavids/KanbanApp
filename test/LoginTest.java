@@ -8,36 +8,31 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+
+
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.ArrayList;
 
 /**
  *
  * @author User
  */
 public class LoginTest {
-    
+
     public LoginTest() {
-    }
-    
-    @BeforeAll
-    public static void setUpClass() {
-    }
-    
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
-    @BeforeEach
-    public void setUp() {
-    }
-    
-    @AfterEach
-    public void tearDown() {
+
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}fe 
+    @Test
+    public void usernameListTest() {
+        ArrayList<String> usernameList = new ArrayList<String>();
+
+        usernameList.add("Abdul_");
+        usernameList.add("Humi_");
+        System.out.println(usernameList);
+    }
+
+    
 }
