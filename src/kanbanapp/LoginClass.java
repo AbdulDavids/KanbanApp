@@ -8,8 +8,9 @@ import javax.swing.JOptionPane;
 public class LoginClass {
     // --------------------------------------------------------------------------------------------------------------------------//
 
-
     // methods
+
+    //returns true or false based on username validity
     public static Boolean checkUserName(String username) {
         if (username.length() < 6 && username.indexOf('_') > -1) {
             return true;
@@ -20,6 +21,7 @@ public class LoginClass {
 
     // --------------------------------------------------------------------------------------------------------------------------//
 
+    //returns true or false based on password complexity
     public static boolean checkPasswordComplexity(String password) {
         if (password.length() < 8) {
             return false;
@@ -63,6 +65,8 @@ public class LoginClass {
 
     // --------------------------------------------------------------------------------------------------------------------------//
 
+
+    //Returns welcome message with first and last names if login status true, returns incorrect login if false
     public static String returnLoginStatus(Boolean loginStatus, String firstName, String lastName) {
         if (Boolean.TRUE.equals(loginStatus)) {
             return "Welcome " + firstName + " " + lastName + " it is great to see you again. ";
@@ -70,18 +74,9 @@ public class LoginClass {
         return "Username or password incorrect, please try again";
     }
 
-    // --------------------------------------------------------------------------------------------------------------------------//
+    
 
-    public static Integer loginOrRegister() {
-        // show a dialog with the options and a message
-        String[] options = { "Register", "Login" };
-        return JOptionPane.showOptionDialog(null, "Please choose an option",
-                "User Input",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options,
-                options[0]);
-    }
-
-    //-------------------------------------------------------------------------------------------------------------------------//
+    // -------------------------------------------------------------------------------------------------------------------------//
 
     // returns true if a username and password are at the same index values in their
     // respective arraylists
@@ -103,11 +98,12 @@ public class LoginClass {
 
     // --------------------------------------------------------------------------------------------------------------------------//
 
+    //shows login message
     public static String loginMessage(Boolean loginStatus, Integer userIndex, ArrayList<String> firstNameList,
             ArrayList<String> lastNameList) {
 
-        String firstName = null;
-        String lastName = null;
+        String firstName = "yes";
+        String lastName = "yes";
 
         if (loginStatus) {
 
@@ -123,6 +119,7 @@ public class LoginClass {
 
     // --------------------------------------------------------------------------------------------------------------------------//
 
+    //returns the index of a user in the userarray
     public static Integer returnUserIndex(String username, ArrayList<String> userNameArray) {
 
         int size = userNameArray.size() + 1;
@@ -141,41 +138,20 @@ public class LoginClass {
 
     }
 
-        //-----------------------------------------------------------------------------------------------------------------------//
+    // -----------------------------------------------------------------------------------------------------------------------//
 
-        public static void displayUsers(ArrayList usernameList){
-            String output = "";
-                for(int i = 0; i<usernameList.size(); i++){
-                    String usernames = usernameList.get(i).toString();
-                
-                    int userNum = i + 1;
 
-                    output += "User #" + userNum + ": " + usernames ;       
-                }
-                JOptionPane.showMessageDialog(null, output);
+    //uses Joptionpane to show a list of users in an array
+    public static void displayUsers(ArrayList<String> usernameList) {
+        String output = "";
+        for (int i = 0; i < usernameList.size(); i++) {
+            String usernames = usernameList.get(i).toString();
+
+            int userNum = i + 1;
+
+            output += "User #" + userNum + ": " + usernames;
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        JOptionPane.showMessageDialog(null, output);
+    }
 
 }

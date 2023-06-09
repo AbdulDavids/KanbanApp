@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class LoginTest {
 
     public LoginTest() {
-
+      // TODO document why this constructor is empty
     }
 
     @Test

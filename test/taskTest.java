@@ -1,4 +1,6 @@
-package kanbanapp;
+
+
+import kanbanapp.taskClass;
 
 public class taskTest {
     public static void main(String[] args) {

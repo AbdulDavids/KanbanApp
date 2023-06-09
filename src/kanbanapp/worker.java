@@ -22,13 +22,13 @@ public class worker {
     }
     // --------------------------------------------------------------------------------------------------------------------------//
 
-    // provides UI for registratration and login
+    // provides UI for registratration and login, loops til login successful
     public Boolean signIn() {
 
         Boolean finished = false;
         while (!finished) {
 
-            int choice = LoginClass.loginOrRegister();
+            int choice = menuClass.loginOrRegister();
             switch (choice) {
                 case 0:
                     // Registration code
@@ -87,7 +87,7 @@ public class worker {
 
     // -------------------------------------------------------------------------------------------------------------------------//
 
-    // displays task menu
+    // displays task app
     public void displayTaskApp() {
 
         Boolean quit = false;
