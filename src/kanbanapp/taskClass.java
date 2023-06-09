@@ -9,14 +9,21 @@ import javax.swing.JTextField;
 
 public class taskClass {
 
-    ArrayList<String> names = new ArrayList<String>();
-    ArrayList<String> taskNumber = new ArrayList<String>();
-    ArrayList<String> description = new ArrayList<String>();
-    ArrayList<String> developer = new ArrayList<String>();
-    ArrayList<String> duration = new ArrayList<String>();
-    ArrayList<String> ID = new ArrayList<String>();
-    ArrayList<String> Status = new ArrayList<String>();
 
+    //task ArrayLists
+    public ArrayList<String> names = new ArrayList<String>();
+    public ArrayList<String> taskNumber = new ArrayList<String>();
+    public ArrayList<String> description = new ArrayList<String>();
+    public ArrayList<String> developer = new ArrayList<String>();
+    public ArrayList<String> duration = new ArrayList<String>();
+    public ArrayList<String> ID = new ArrayList<String>();
+    public ArrayList<String> Status = new ArrayList<String>();
+
+
+    // --------------------------------------------------------------------------------------------------------------------------//
+
+
+    //prompts the user to fill task arrays using JPanel, takes an integer as an arguement for the number of tasks to be entered. Displays all tasks once complete
     public void addTasks(Integer NumberOfTasks) {
 
         for (int count = 0; count < NumberOfTasks;) {
@@ -49,7 +56,9 @@ public class taskClass {
                     ID.add(createTaskID(fields[0].getText(), String.valueOf(count), fields[2].getText()));
 
                     count += 1;
-                } else {
+                } else 
+                
+                {
                     JOptionPane.showConfirmDialog(null, panel,
                             "Please enter a description with less than 50 characters",
                             JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
@@ -58,9 +67,18 @@ public class taskClass {
             }
 
         }
-
+        displayTasks();
     }
 
+
+
+
+// --------------------------------------------------------------------------------------------------------------------------//
+
+
+
+
+//Does what it says on the tin. Displays all tasks in the taskClass using JOptionpane
     public void displayTasks() {
 
         StringBuilder message = new StringBuilder();
@@ -71,19 +89,28 @@ public class taskClass {
             int num = count + 1;
 
             message.append("\nTask #" + num + "\n");
-            message.append("Task: ").append(name).append("\n");
-            message.append("ID: ").append(ID.get(count)).append("\n");
-            message.append("Developer: ").append(developer.get(count)).append("\n");
-            message.append("Description: ").append(description.get(count)).append("\n");
             message.append("Status: ").append(Status.get(count)).append("\n");
+
+            message.append("Task: ").append(name).append("\n");
+            message.append("Description: ").append(description.get(count)).append("\n");
+            message.append("ID: ").append(ID.get(count)).append("\n");
+            message.append("Duration: ").append(duration.get(count)).append("\n");
 
             count += 1;
         }
+
+        message.append("\nTotalDuration: ").append(returnTotalHours(duration)).append("\n");
 
         JOptionPane.showMessageDialog(null, message.toString(), "Tasks", JOptionPane.INFORMATION_MESSAGE);
 
     }
 
+
+
+// --------------------------------------------------------------------------------------------------------------------------//
+
+
+    //takes task name, number and dev name as parameter and returns task ID
     public static String createTaskID(String taskName, String taskNumber, String developer) {
 
         StringBuilder taskID = new StringBuilder();
@@ -107,27 +134,42 @@ public class taskClass {
         return taskID.toString().toUpperCase();
     }
 
-    public static int returnTotalHours(int[] durationArr) {
 
-        int d = durationArr.length;
+
+// --------------------------------------------------------------------------------------------------------------------------//
+
+
+    //tasks an array and returns the sum of all values
+    public static int returnTotalHours(ArrayList<String> durationArr) {
+
+        int d = durationArr.size();
         int totalHours = 0;
 
         for (int i = 0; i < d; i++) {
-            totalHours += durationArr[i];
+            totalHours += Integer.valueOf(durationArr.get(i));
         }
 
         return totalHours;
     }
 
+
+
+// --------------------------------------------------------------------------------------------------------------------------//
+
+    //ensures description string contains less than 50 characters
     public static boolean checkTaskDescription(String description) {
 
         if (description.length() < 50) {
             return true;
+        } else {
+            return false;
         }
 
-        return false;
     }
 
-
-
 }
+
+
+
+// --------------------------------------------------------------------------------------------------------------------------//
+// -----------------------------------------------End of File-------------------------------------------------------------------//

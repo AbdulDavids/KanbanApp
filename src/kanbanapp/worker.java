@@ -28,7 +28,8 @@ public class worker {
         Boolean finished = false;
         while (!finished) {
 
-            int choice = menuClass.loginOrRegister();
+            int choice = menuClass.loginOrRegister(); 
+
             switch (choice) {
                 case 0:
                     // Registration code
@@ -94,7 +95,8 @@ public class worker {
 
         while (!quit) {
 
-            switch (menuClass.taskMenu()) {
+            switch (menuClass.taskMenu()) //displays a prompt for addinf tasks, displaying tasks and users and signing out
+            {
                 case 0:
                     // JOptionPane.showMessageDialog(null, "Add Task Coming Soon", null, 1);
 
@@ -125,4 +127,5 @@ public class worker {
     }
 }
 
-// ------------------------------------------------------------------------------------------------------------------------------//
+// ------------------------------------------------------------------------------------------------------------------//
+// -----------------------------------------------End of File-------------------------------------------------------------------//
